@@ -1,1 +1,1 @@
-# spacecraft_game
+# blood_stars_game
