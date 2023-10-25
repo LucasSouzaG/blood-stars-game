@@ -1,5 +1,5 @@
 import pygame
-from settings import TOTAL_SCREEN_WITH, TOTAL_SCREEN_HEIGHT
+from settings import WINDOW_RESOLUTION
 
 class Main_menu:
     def __init__(self):
@@ -7,6 +7,6 @@ class Main_menu:
 
     def display(self):
         pygame.init()
-        pygame.display.set_mode((TOTAL_SCREEN_WITH,TOTAL_SCREEN_HEIGHT))
+        pygame.display.set_mode(WINDOW_RESOLUTION)
         pygame.display.set_caption(self.window_name)
 
