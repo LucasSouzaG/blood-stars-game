@@ -2,17 +2,11 @@ import pygame
 from settings import WINDOW_RESOLUTION
 from pygame.sprite import Sprite
 
-class Menu(Sprite):
+class Select_ship(Sprite):
     def __init__(self):
-        self.window_name = 'Menu Principal'
+        self.window_name = 'Selecione a Nave'
 
     def display(self):
-        pygame.init()
-        display = pygame.display.set_mode(WINDOW_RESOLUTION)
-        pygame.display.set_caption(self.window_name)
-        return display
-
-    def display_refresh(self):
         display = pygame.display.set_mode(WINDOW_RESOLUTION)
         pygame.display.set_caption(self.window_name)
         return display
