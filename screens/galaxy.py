@@ -73,7 +73,7 @@ class Galaxy:
         self.enemy_projectiles = []
         self.explosions = []
         self.game_over = False
-        self.NEXT_LEVEL_SCORE = 50  # Defina a pontuação necessária para passar de fase
+        self.NEXT_LEVEL_SCORE = 80  # Defina a pontuação necessária para passar de fase
         self.next_level_unlocked = False
         self.next_level_reached = False
 

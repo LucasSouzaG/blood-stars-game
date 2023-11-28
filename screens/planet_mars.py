@@ -7,8 +7,11 @@ from screens.menu import nave_selecionada
 # from settings import WINDOW_RESOLUTION
 WINDOW_RESOLUTION = (1000, 600)
 pygame.mixer.init()
-shoot_sound = pygame.mixer.Sound('screens/shoot.wav')
+shoot_sound = pygame.mixer.Sound('screens/shot.wav')
 collision_sound = pygame.mixer.Sound('screens/som_explosion.wav')
+pygame.mixer.music.load('screens/trilhasonora.wav')
+pygame.mixer.music.set_volume(1.5)
+pygame.mixer.music.play(-1)
 
 
 class MascaraSprite(pygame.sprite.Sprite):
@@ -442,6 +445,6 @@ class TelaVitoria:
                         pygame.quit()
                         sys.exit()
 
-maximo_de_inimigos = 10
+maximo_de_inimigos = 30
 marte = Marte()
 marte.display()

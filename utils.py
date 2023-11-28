@@ -1,14 +1,5 @@
 import pygame
 
-
-# Fazer um carrosel com a imagem de fundo
-    # rel_x = X % menu.menu_background().get_rect().width
-    # menu_display.blit(menu.menu_background(), (rel_x - menu.menu_background().get_rect().width,0))
-    # if rel_x < 1280:
-    #     menu_display.blit(menu.menu_background(), (rel_x,0))
-
-    # X -= 4
-
 def calculate_screen_center(screen_resolution, image):
     tela_largura, tela_altura = screen_resolution
     
