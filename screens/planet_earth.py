@@ -300,7 +300,6 @@ class Earth:
                     if button_next_level.collidepoint(mouse_x, mouse_y):
                         # Clicou em "Próxima Fase"
                         choice_made = True
-                        '''self.reiniciar_jogo()  # Reinicie o jogo para a próxima fase'''
                         from screens.galaxy import Galaxy
 
                     elif button_quit.collidepoint(mouse_x, mouse_y):
