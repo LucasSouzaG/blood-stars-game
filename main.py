@@ -1,5 +1,5 @@
-from screens import Menu
 from screens.main_menu import Main_menu
+from screens.menu import main
 from screens.learning_game import Learning_Game
 from utils import calculate_screen_center, button_learning_game, button_return
 from settings import WINDOW_RESOLUTION
@@ -7,8 +7,8 @@ import pygame
 
 run = True
 
-menu = Main_menu()
-menu_display = menu.display()
+menu_ = Main_menu()
+menu_display = menu_.display()
 menu_open = True
 
 learning_game = Learning_Game()
@@ -18,9 +18,9 @@ while run:
     for event in pygame.event.get():
 
         if menu_open:
-            menu_display = menu.display_refresh()
-            menu_display.blit(menu.background(), (0,0))
-            menu_display.blit(menu.title(), calculate_screen_center(WINDOW_RESOLUTION, menu.title()))
+            menu_display = menu_.display_refresh()
+            menu_display.blit(menu_.background(), (0,0))
+            menu_display.blit(menu_.title(), calculate_screen_center(WINDOW_RESOLUTION, menu_.title()))
             menu_display.blit(button_learning_game(), (10,10))
             learning_game_open = True
             menu_open = False
@@ -32,7 +32,7 @@ while run:
             if event.key == pygame.K_ESCAPE:  # Verifica se a tecla pressionada foi o "ESC"
                 run = False
             elif learning_game_open == True:
-                Menu.main()
+                main()
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:  # Clique do botão esquerdo do mouse

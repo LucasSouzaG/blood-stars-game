@@ -62,7 +62,7 @@ def main():
                         print("Você escolheu a nave", selected_ship + 1)
                         print("Caminho da nave selecionada:", nave_selecionada)
                         # Restante do código para iniciar o jogo ou realizar outras ações
-                        from screens.galaxy import Galaxy
+                        from screens.planet_earth import Earth
                         running = False
                 else:
                     for i, image in enumerate(ship_images):

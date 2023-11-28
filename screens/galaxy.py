@@ -2,7 +2,7 @@ import sys
 import pygame
 import random
 import math
-from screens.Menu import nave_selecionada
+from screens.menu import nave_selecionada
 
 WINDOW_RESOLUTION = (1000, 600)
 pygame.mixer.init()
