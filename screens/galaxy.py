@@ -158,8 +158,12 @@ class Galaxy:
                     for projectile in self.projectiles:
                         projectile.update()
                         projectile.draw(window)
-
-                        if projectile.rect.x >= WINDOW_RESOLUTION[0]:
+                        if (
+                                projectile.rect.y < -projectile.rect.height
+                                or projectile.rect.y > WINDOW_RESOLUTION[1]
+                                or projectile.rect.x < -projectile.rect.width
+                                or projectile.rect.x > WINDOW_RESOLUTION[0]
+                        ):
                             projectile.collided = True
 
                     for enemy_projectile in self.enemy_projectiles:
@@ -318,13 +322,13 @@ class Player(MaskedSprite):
         self.life = 3
         self.score = 0
         self.rotacao = 0
-        self.progelil = Projectile
+        self.direcao_projetil = 'direito'
 
     def shoot(self):
         if self.projectile_cooldown <= 0:
-            projectile = Projectile(self.rect.centerx, self.rect.centery)
+            projectile = Projectile(self.rect.centerx, self.rect.centery, self.direcao_projetil)
             galaxy.projectiles.append(projectile)
-            self.projectile_cooldown = 30
+            self.projectile_cooldown = 10
             shoot_sound.play()
 
     def update(self):
@@ -354,6 +358,7 @@ class Player(MaskedSprite):
                 self.rotacao -= 90
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 90
+            self.direcao_projetil = 'paracima'
         if keys[pygame.K_a]:
             if self.rotacao == 0:
                 self.rotacao += 180
@@ -363,9 +368,9 @@ class Player(MaskedSprite):
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 180
             if self.rotacao == 270:
-
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 180
+            self.direcao_projetil = 'esquerda'
         if keys[pygame.K_s]:
             if self.rotacao == 0:
                 self.rotacao += 270
@@ -379,22 +384,22 @@ class Player(MaskedSprite):
                 self.rotacao -= 90
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 270
+            self.direcao_projetil = 'parabaixo'
         if keys[pygame.K_d]:
             if self.rotacao == 270:
                 self.rotacao -= 180
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 0
             if self.rotacao == 180:
-
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 0
             if self.rotacao == 90:
                 self.rotacao -= 180
                 self.image = pygame.transform.rotate(self.image, self.rotacao)
                 self.rotacao = 0
+            self.direcao_projetil = 'direito'
 
         '''self.image = pygame.transform.rotate(self.image, self.rotacao)'''
-
 
         if self.projectile_cooldown > 0:
             self.projectile_cooldown -= 1
@@ -433,7 +438,7 @@ class Enemy(MaskedSprite):
         window.blit(self.image, self.rect)
 
     def shoot(self):
-        projectile = EnemyProjectile(self.rect.centerx, self.rect.centery)
+        projectile = EnemyProjectile(self.rect.centerx, self.rect.centery, "esquerda")
         galaxy.enemy_projectiles.append(projectile)
 
 
@@ -460,14 +465,25 @@ class NewEnemy(Enemy):
 
 
 class Projectile(MaskedSprite):
-    def __init__(self, x, y):
-        super().__init__('screens/Tiles/tile_0000.png', (20, 20))
+
+    def __init__(self, x, y, direcao):
+        super().__init__('screens/Tiles/tile_0009.png', (30, 30))
         self.rect.center = (x, y)
         self.speed_x = 10
         self.collided = False
+        self.rotacao = 0
+        self.player = Player()
+        self.direcao = direcao
 
     def update(self):
-        self.rect.x += self.speed_x
+        if self.direcao == "direito":
+            self.rect.x += self.speed_x
+        elif self.direcao == "esquerda":
+            self.rect.x -= self.speed_x
+        elif self.direcao == "paracima":
+            self.rect.y -= self.speed_x
+        elif self.direcao == "parabaixo":
+            self.rect.y += self.speed_x
 
 
 class EnemyProjectile(Projectile):
@@ -475,6 +491,6 @@ class EnemyProjectile(Projectile):
         self.rect.x -= self.speed_x
 
 
-MAX_ENEMIES = 50
+MAX_ENEMIES = 20
 galaxy = Galaxy()
 galaxy.display()

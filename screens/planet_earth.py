@@ -461,7 +461,7 @@ class NewEnemy(Enemy):
 
 class Projectile(MaskedSprite):
     def __init__(self, x, y):
-        super().__init__('screens/Tiles/tile_0000.png', (20, 20))
+        super().__init__('screens\imageTerra\_tile_0003.png', (20, 20))
         self.rect.center = (x, y)
         self.speed_x = 10
         self.collided = False
@@ -475,6 +475,7 @@ class EnemyProjectile(Projectile):
         self.rect.x -= self.speed_x
 
 
-MAX_ENEMIES = 50
+
+MAX_ENEMIES = 10
 earth = Earth()
 earth.display()
